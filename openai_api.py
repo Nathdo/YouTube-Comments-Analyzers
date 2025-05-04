@@ -5,7 +5,7 @@ import re
 from collections import Counter
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_KEY"))
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def analyze_comments(comments):
     prompt = (
