@@ -1,0 +1,27 @@
+# Environnement virtuel
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Fichiers sensibles
+.env
+*.log
+*.sqlite3
+*.db
+
+# Fichiers temporaires / système
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Fichiers générés
+.history.json
+
+# Fichiers de déploiement Railway / Render (optionnel)
+*.bak
