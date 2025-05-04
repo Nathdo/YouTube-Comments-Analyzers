@@ -21,7 +21,7 @@ __pycache__/
 *~
 
 # Fichiers générés
-.history.json
+history.json
 
 # Fichiers de déploiement Railway / Render (optionnel)
 *.bak
