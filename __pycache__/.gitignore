@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environnement virtuel
+env/
+venv/
+
+# Fichiers sensibles
+.env
+
+# Fichiers spécifiques
+history.json
+*.log
+
