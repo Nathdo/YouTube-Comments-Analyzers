@@ -20,6 +20,11 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
+# Configuration pour Railway
+if os.getenv('RAILWAY_ENVIRONMENT'):
+    app.config['SERVER_NAME'] = 'mystartup-production.up.railway.app'
+    app.config['PREFERRED_URL_SCHEME'] = 'https'
+
 # OAuth Google
 oauth = OAuth(app)
 google = oauth.register(
@@ -92,6 +97,8 @@ def clear_history():
 def login():
     redirect_uri = url_for('auth', _external=True)
     print("REDIRECT URI GENERATED:", redirect_uri)
+    print("SERVER_NAME:", app.config.get('SERVER_NAME'))
+    print("PREFERRED_URL_SCHEME:", app.config.get('PREFERRED_URL_SCHEME'))
     return google.authorize_redirect(redirect_uri)
 
 
