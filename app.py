@@ -50,6 +50,7 @@ def index():
     emotion_labels = []
     emotion_values = []
     history = load_history()
+    video_title = None
 
     if request.method == 'POST':
         if 'email' not in session:
@@ -84,7 +85,8 @@ def index():
         emotions=emotions,
         emotion_labels=emotion_labels,
         emotion_values=emotion_values,
-        history=history
+        history=history,
+        video_title=video_title
     )
 
 @app.route('/clear-history', methods=['POST'])
