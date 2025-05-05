@@ -95,10 +95,9 @@ def clear_history():
 
 @app.route('/login')
 def login():
-    redirect_uri = url_for('auth', _external=True)
-    print("REDIRECT URI GENERATED:", redirect_uri)
-    print("SERVER_NAME:", app.config.get('SERVER_NAME'))
-    print("PREFERRED_URL_SCHEME:", app.config.get('PREFERRED_URL_SCHEME'))
+    # Pour Railway, on force l'URL HTTPS
+    redirect_uri = "https://mystartup-production.up.railway.app/auth"
+    print("REDIRECT URI FOR GOOGLE:", redirect_uri)
     return google.authorize_redirect(redirect_uri)
 
 
