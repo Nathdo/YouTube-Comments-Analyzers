@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-YOUTUBE_API_KEY = os.getenv('YouTube_API_KEY')
+YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 
 def extract_video_id(url):
     match = re.search(r"v=([^&]+)", url)
