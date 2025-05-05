@@ -34,12 +34,11 @@ google = oauth.register(
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/',
-    userinfo_endpoint='https://www.googleapis.com/oauth2/v3/userinfo',  # ✅ indispensable
+    userinfo_endpoint='https://www.googleapis.com/oauth2/v3/userinfo',  
     client_kwargs={
-        'scope': 'email profile'  # ✅ PAS "openid"
+        'scope': 'email profile'  
     }
 )
-
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -77,6 +76,27 @@ def index():
 
         save_to_history(video_url, summary, video_title, thumbnail_url)
         history = load_history()
+
+        # Stocker les résultats dans la session et rediriger (POST/REDIRECT/GET)
+        session['results'] = {
+            'summary': summary,
+            'topics': topics,
+            'emotions': emotions,
+            'emotion_labels': emotion_labels,
+            'emotion_values': emotion_values,
+            'video_title': video_title
+        }
+        return redirect(url_for('index'))
+
+    # GET : récupérer les résultats de la session s'ils existent
+    results = session.pop('results', None)
+    if results:
+        summary = results.get('summary')
+        topics = results.get('topics')
+        emotions = results.get('emotions')
+        emotion_labels = results.get('emotion_labels')
+        emotion_values = results.get('emotion_values')
+        video_title = results.get('video_title')
 
     return render_template(
         'index.html',

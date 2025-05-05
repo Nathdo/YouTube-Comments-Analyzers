@@ -43,8 +43,8 @@
             {% else %}
                 <p class="text-sm text-gray-500">No history yet.</p>
             {% endfor %}
-            <form action="/clear-history" method="post" onsubmit="return confirm('Are you sure you want to clear the history?');">
-                <button type="submit" class="w-full mt-4 text-xs text-gray-500 hover:text-red-600">🗑 Clear History</button>
+            <form id="clearHistoryForm" action="/clear-history" method="post">
+                <button type="button" id="clearHistoryBtn" class="w-full mt-4 text-xs text-gray-500 hover:text-red-600">🗑 Clear History</button>
             </form>
         </aside>
 
@@ -99,6 +99,18 @@
         </main>
     </div>
 
+    <!-- Pop-up personnalisé pour la confirmation -->
+    <div id="customConfirm" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            <h3 class="text-lg font-semibold mb-4 text-red-600">Clear history?</h3>
+            <p class="mb-6 text-gray-700">Do you really want to delete all history?</p>
+            <div class="flex justify-center space-x-4">
+                <button id="cancelClear" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">Cancel</button>
+                <button id="confirmClear" class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">Delete</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const form = document.getElementById('analyzeForm');
         const loading = document.getElementById('loading');
@@ -127,16 +139,17 @@
             }
             return true;
         }
-
-        {% if emotion_labels and emotion_values %}
+    </script>
+    {% if emotion_labels and emotion_values %}
+    <script>
         const ctx = document.getElementById('emotionsChart').getContext('2d');
         new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: {{ emotion_labels | tojson }},
+                labels: {{ emotion_labels|tojson|safe }},
                 datasets: [{
-                    data: {{ emotion_values | tojson }},
-                    backgroundColor: ['#EF4444', '#F97316', '#F59E0B', '#10B981', '#3B82F6'],
+                    data: {{ emotion_values|tojson|safe }},
+                    backgroundColor: ['#EF4444','#F97316','#F59E0B','#10B981','#3B82F6'],
                     borderWidth: 1
                 }]
             },
@@ -147,7 +160,30 @@
                 }
             }
         });
-        {% endif %}
+    </script>
+    {% endif %}
+    <script>
+        // Pop-up personnalisé pour la suppression de l'historique
+        const clearBtn = document.getElementById('clearHistoryBtn');
+        const customConfirm = document.getElementById('customConfirm');
+        const cancelClear = document.getElementById('cancelClear');
+        const confirmClear = document.getElementById('confirmClear');
+        const clearForm = document.getElementById('clearHistoryForm');
+
+        if (clearBtn && customConfirm && cancelClear && confirmClear && clearForm) {
+            clearBtn.addEventListener('click', function(e) {
+                customConfirm.classList.remove('hidden');
+            });
+
+            cancelClear.addEventListener('click', function() {
+                customConfirm.classList.add('hidden');
+            });
+
+            confirmClear.addEventListener('click', function() {
+                customConfirm.classList.add('hidden');
+                clearForm.submit();
+            });
+        }
     </script>
 </body>
 </html>
