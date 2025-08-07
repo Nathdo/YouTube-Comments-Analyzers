@@ -1,6 +1,6 @@
 # YouTube Comments Analyzer 
 
-**Live demo**: [https://mystartup-production.up.railway.app/](https://mystartup-production.up.railway.app/)  
+**## Try It Online**: **** 
 **Author**: [Nathan Douieb](https://github.com/Nathdo)
 
 ## Project Overview
@@ -34,13 +34,6 @@ This tool provides creators with **quick insights** about their community.
 | Flask | Backend and routing |
 | Railway | Production deployment |
 | Regex & Prompt Engineering | Text processing and LLM optimization |
-
----
-
-## Try It Online
-
-Paste any YouTube video link in the live demo:  
-👉 [https://mystartup-production.up.railway.app/](https://mystartup-production.up.railway.app/)
 
 ---
 
