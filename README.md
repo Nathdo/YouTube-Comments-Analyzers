@@ -4,6 +4,8 @@
 
 **Author**: [Nathan Douieb](https://github.com/Nathdo)
 
+![Weights](Capture.png)
+
 ## Project Overview
 
 This project is a **YouTube comments analyzer** powered by **LLMs**.  
