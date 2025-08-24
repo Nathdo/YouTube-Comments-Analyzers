@@ -2,6 +2,9 @@
 
 **## Try It Online**: [https://***]
 
+If you would like a free demo of this project, feel free to contact me.
+📩 Email: Douiebnathan1999@gmail.com
+
 **Author**: [Nathan Douieb](https://github.com/Nathdo)
 
 ![Weights](Capture.png)
